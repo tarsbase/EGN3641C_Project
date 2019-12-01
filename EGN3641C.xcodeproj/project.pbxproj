@@ -3,18 +3,27 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B0096ED2382FD5000F4881A /* AudioRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0096EC2382FD5000F4881A /* AudioRoomViewController.swift */; };
+		1B0096F12383165D00F4881A /* CallManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0096F02383165D00F4881A /* CallManager.swift */; };
+		1B2E764F2392BB5C00C54B7D /* CallManager+CallKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B2E764E2392BB5C00C54B7D /* CallManager+CallKit.swift */; };
+		1B2E76512392C86200C54B7D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1B2E76502392C86200C54B7D /* GoogleService-Info.plist */; };
+		1B2E76532392C9C100C54B7D /* BrowseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B2E76522392C9C100C54B7D /* BrowseTableViewController.swift */; };
+		1B2E76552392CAFD00C54B7D /* RoomData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B2E76542392CAFD00C54B7D /* RoomData.swift */; };
+		1B2E76592393788000C54B7D /* ApiKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B2E76582393788000C54B7D /* ApiKeys.swift */; };
 		1BC48442234799F800BD5AB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC48441234799F800BD5AB9 /* AppDelegate.swift */; };
 		1BC48444234799F800BD5AB9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC48443234799F800BD5AB9 /* SceneDelegate.swift */; };
-		1BC48446234799F800BD5AB9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC48445234799F800BD5AB9 /* ViewController.swift */; };
 		1BC48449234799F800BD5AB9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1BC48447234799F800BD5AB9 /* Main.storyboard */; };
 		1BC4844B234799FD00BD5AB9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1BC4844A234799FD00BD5AB9 /* Assets.xcassets */; };
 		1BC4844E234799FD00BD5AB9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1BC4844C234799FD00BD5AB9 /* LaunchScreen.storyboard */; };
 		1BC48459234799FD00BD5AB9 /* EGN3641CTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC48458234799FD00BD5AB9 /* EGN3641CTests.swift */; };
 		1BC48464234799FD00BD5AB9 /* EGN3641CUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC48463234799FD00BD5AB9 /* EGN3641CUITests.swift */; };
+		1BC484722347FED000BD5AB9 /* JoinRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC484712347FED000BD5AB9 /* JoinRoomViewController.swift */; };
+		1BC484762348017C00BD5AB9 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC484752348017C00BD5AB9 /* Extensions.swift */; };
+		FC5021C0B325324CA90A90A1 /* Pods_EGN3641C.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27376A50FB8EF2786C6DA5A9 /* Pods_EGN3641C.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,10 +44,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1B0096EC2382FD5000F4881A /* AudioRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRoomViewController.swift; sourceTree = "<group>"; };
+		1B0096F02383165D00F4881A /* CallManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallManager.swift; sourceTree = "<group>"; };
+		1B2E764E2392BB5C00C54B7D /* CallManager+CallKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CallManager+CallKit.swift"; sourceTree = "<group>"; };
+		1B2E76502392C86200C54B7D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		1B2E76522392C9C100C54B7D /* BrowseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseTableViewController.swift; sourceTree = "<group>"; };
+		1B2E76542392CAFD00C54B7D /* RoomData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomData.swift; sourceTree = "<group>"; };
+		1B2E76582393788000C54B7D /* ApiKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ApiKeys.swift; path = /Users/brandonbaker/Documents/GitHub/EGN3641C/EGN3641C/ApiKeys.swift; sourceTree = "<absolute>"; };
 		1BC4843E234799F800BD5AB9 /* EGN3641C.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EGN3641C.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BC48441234799F800BD5AB9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1BC48443234799F800BD5AB9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		1BC48445234799F800BD5AB9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		1BC48448234799F800BD5AB9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1BC4844A234799FD00BD5AB9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1BC4844D234799FD00BD5AB9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -49,6 +64,11 @@
 		1BC4845F234799FD00BD5AB9 /* EGN3641CUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EGN3641CUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BC48463234799FD00BD5AB9 /* EGN3641CUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EGN3641CUITests.swift; sourceTree = "<group>"; };
 		1BC48465234799FD00BD5AB9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1BC484712347FED000BD5AB9 /* JoinRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinRoomViewController.swift; sourceTree = "<group>"; };
+		1BC484752348017C00BD5AB9 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		27376A50FB8EF2786C6DA5A9 /* Pods_EGN3641C.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EGN3641C.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6090F17F80CB1924DDFF924D /* Pods-EGN3641C.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EGN3641C.debug.xcconfig"; path = "Target Support Files/Pods-EGN3641C/Pods-EGN3641C.debug.xcconfig"; sourceTree = "<group>"; };
+		6D4D5B401DF9394F1770BE5C /* Pods-EGN3641C.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EGN3641C.release.xcconfig"; path = "Target Support Files/Pods-EGN3641C/Pods-EGN3641C.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC5021C0B325324CA90A90A1 /* Pods_EGN3641C.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,6 +97,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		110AB1250F4D9CC7FBB990E4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				27376A50FB8EF2786C6DA5A9 /* Pods_EGN3641C.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		1BC48435234799F800BD5AB9 = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +112,8 @@
 				1BC48457234799FD00BD5AB9 /* EGN3641CTests */,
 				1BC48462234799FD00BD5AB9 /* EGN3641CUITests */,
 				1BC4843F234799F800BD5AB9 /* Products */,
+				F715C6C10F09403660A6AD76 /* Pods */,
+				110AB1250F4D9CC7FBB990E4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -99,13 +130,21 @@
 		1BC48440234799F800BD5AB9 /* EGN3641C */ = {
 			isa = PBXGroup;
 			children = (
+				1B2E76582393788000C54B7D /* ApiKeys.swift */,
 				1BC48441234799F800BD5AB9 /* AppDelegate.swift */,
 				1BC48443234799F800BD5AB9 /* SceneDelegate.swift */,
-				1BC48445234799F800BD5AB9 /* ViewController.swift */,
+				1BC484712347FED000BD5AB9 /* JoinRoomViewController.swift */,
+				1B0096EC2382FD5000F4881A /* AudioRoomViewController.swift */,
+				1B2E76522392C9C100C54B7D /* BrowseTableViewController.swift */,
+				1B2E76542392CAFD00C54B7D /* RoomData.swift */,
+				1B0096F02383165D00F4881A /* CallManager.swift */,
+				1B2E764E2392BB5C00C54B7D /* CallManager+CallKit.swift */,
+				1BC484752348017C00BD5AB9 /* Extensions.swift */,
 				1BC48447234799F800BD5AB9 /* Main.storyboard */,
 				1BC4844A234799FD00BD5AB9 /* Assets.xcassets */,
 				1BC4844C234799FD00BD5AB9 /* LaunchScreen.storyboard */,
 				1BC4844F234799FD00BD5AB9 /* Info.plist */,
+				1B2E76502392C86200C54B7D /* GoogleService-Info.plist */,
 			);
 			path = EGN3641C;
 			sourceTree = "<group>";
@@ -128,6 +167,15 @@
 			path = EGN3641CUITests;
 			sourceTree = "<group>";
 		};
+		F715C6C10F09403660A6AD76 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6090F17F80CB1924DDFF924D /* Pods-EGN3641C.debug.xcconfig */,
+				6D4D5B401DF9394F1770BE5C /* Pods-EGN3641C.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -135,9 +183,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1BC48468234799FD00BD5AB9 /* Build configuration list for PBXNativeTarget "EGN3641C" */;
 			buildPhases = (
+				3F01F945AEC4DAB5F89DCF1A /* [CP] Check Pods Manifest.lock */,
 				1BC4843A234799F800BD5AB9 /* Sources */,
 				1BC4843B234799F800BD5AB9 /* Frameworks */,
 				1BC4843C234799F800BD5AB9 /* Resources */,
+				9A25FE4B29662B9A02CAB699 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -233,6 +283,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1BC4844E234799FD00BD5AB9 /* LaunchScreen.storyboard in Resources */,
+				1B2E76512392C86200C54B7D /* GoogleService-Info.plist in Resources */,
 				1BC4844B234799FD00BD5AB9 /* Assets.xcassets in Resources */,
 				1BC48449234799F800BD5AB9 /* Main.storyboard in Resources */,
 			);
@@ -254,14 +305,63 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		3F01F945AEC4DAB5F89DCF1A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-EGN3641C-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9A25FE4B29662B9A02CAB699 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-EGN3641C/Pods-EGN3641C-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-EGN3641C/Pods-EGN3641C-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EGN3641C/Pods-EGN3641C-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		1BC4843A234799F800BD5AB9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1BC48446234799F800BD5AB9 /* ViewController.swift in Sources */,
+				1BC484762348017C00BD5AB9 /* Extensions.swift in Sources */,
 				1BC48442234799F800BD5AB9 /* AppDelegate.swift in Sources */,
 				1BC48444234799F800BD5AB9 /* SceneDelegate.swift in Sources */,
+				1B2E76552392CAFD00C54B7D /* RoomData.swift in Sources */,
+				1B2E76592393788000C54B7D /* ApiKeys.swift in Sources */,
+				1B2E76532392C9C100C54B7D /* BrowseTableViewController.swift in Sources */,
+				1B2E764F2392BB5C00C54B7D /* CallManager+CallKit.swift in Sources */,
+				1B0096F12383165D00F4881A /* CallManager.swift in Sources */,
+				1B0096ED2382FD5000F4881A /* AudioRoomViewController.swift in Sources */,
+				1BC484722347FED000BD5AB9 /* JoinRoomViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -432,6 +532,7 @@
 		};
 		1BC48469234799FD00BD5AB9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6090F17F80CB1924DDFF924D /* Pods-EGN3641C.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -444,12 +545,13 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.brandonbaker.EGN3641C;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		1BC4846A234799FD00BD5AB9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6D4D5B401DF9394F1770BE5C /* Pods-EGN3641C.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -462,7 +564,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.brandonbaker.EGN3641C;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

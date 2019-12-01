@@ -1,0 +1,14 @@
+${PODS_ROOT}/Target Support Files/Pods-EGN3641C/Pods-EGN3641C-frameworks.sh
+${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework
+${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework
+${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework
+${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework
+${BUILT_PRODUCTS_DIR}/Material/Material.framework
+${BUILT_PRODUCTS_DIR}/Motion/Motion.framework
+${BUILT_PRODUCTS_DIR}/Protobuf/protobuf.framework
+${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework
+${PODS_ROOT}/TwilioVideo/Build/iOS/TwilioVideo.framework
+${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework
+${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework
+${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework
+${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework
