@@ -12,6 +12,7 @@ import SnapKit
 import TwilioVideo
 import FirebaseFirestore
 import Alamofire
+import SCLAlertView
 
 
 class JoinRoomViewController: UIViewController {
@@ -20,139 +21,207 @@ class JoinRoomViewController: UIViewController {
         case join
         case create
     }
-    
+
+    let slideInView = UIView()
+    let headerView = UIView()
     let nameTextField = TextField()
+    let passwordTextField = TextField()
     let roomTextField = TextField()
+    let createButton = FlatButton()
+    let joinButton = FlatButton()
     let label = UILabel()
     let button = FlatButton()
-    var joinRoomAction : () -> Void = { }
     var selectedAction : SelectedAction = .create
     var disconnect : () -> Void = { }
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupHeader()
         setupViews()
     }
+    
+    
+    func setupHeader() {
+        
+        headerView.backgroundColor = .primary
+        self.view.addSubview(headerView)
+        headerView.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
+            make.height.equalTo(90)
+        }
+        
+        
+        let titleLabel = UILabel()
+        titleLabel.text = "Ambience"
+        titleLabel.textAlignment = .left
+        titleLabel.textColor = .white
+        titleLabel.font = .avinerMedium
+        titleLabel.fontSize = 27
+        headerView.addSubview(titleLabel)
+        titleLabel.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(24)
+            make.bottom.equalToSuperview()
+            make.right.equalToSuperview()
+        }
+    }
+    
     
     func setupViews() {
         self.view.backgroundColor = .grayBG
         self.statusBarController?.statusBarStyle = .lightContent
-        let titleLabel = UILabel()
-        titleLabel.text = "Ambience"
-        titleLabel.textAlignment = .center
-        titleLabel.textColor = .white
-        titleLabel.font = .avinerMedium
-        titleLabel.fontSize = 40
-        self.view.addSubview(titleLabel)
-        titleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(64)
-            make.width.equalToSuperview()
-            make.height.equalTo(40)
-            make.centerX.equalToSuperview()
-        }
+        
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         view.addGestureRecognizer(tap)
         
-        let segmentController = UISegmentedControl(items: ["Create a Room", "Join a Room"])
-        segmentController.selectedSegmentIndex = 0
-        segmentController.addTarget(self, action: #selector(updateSelectedAction(sender:)), for: .valueChanged)
-        segmentController.selectedSegmentTintColor = .greenAccent
-        let blackText = [NSAttributedString.Key.foregroundColor: UIColor.black]
-        let greenText = [NSAttributedString.Key.foregroundColor: UIColor.greenAccent]
-        segmentController.setTitleTextAttributes(greenText, for: .normal)
-        segmentController.setTitleTextAttributes(blackText, for: .selected)
-        self.view.addSubview(segmentController)
-        segmentController.snp.makeConstraints { make in
+        nameTextField.placeholder = "Nickname"
+        nameTextField.tintColor = .primary
+        nameTextField.textColor = .darkPromptText
+        nameTextField.detailColor = .primary
+        nameTextField.placeholderActiveColor = .primary
+        nameTextField.dividerActiveColor = .primary
+        nameTextField.dividerNormalColor = .primary
+        nameTextField.placeholderNormalColor = .darkPromptText
+        self.view.addSubview(nameTextField)
+        nameTextField.snp.makeConstraints { make in
+            make.top.equalTo(headerView.snp.bottom).offset(64)
             make.centerX.equalToSuperview()
-            make.width.equalTo(300)
+            make.width.equalToSuperview().offset(-32)
             make.height.equalTo(40)
-            make.top.equalTo(titleLabel.snp.bottom).offset(64)
         }
         
-        label.text = "Create a Room"
+        let halfWidth = (Screen.width / 2) - 64
+        joinButton.titleColor = .grayBG
+        joinButton.backgroundColor = .primary
+        joinButton.layer.cornerRadius = 4
+        joinButton.title = "Join a Room"
+        joinButton.addTarget(self, action: #selector(joinButtonPressed), for: .touchUpInside)
+        self.view.addSubview(joinButton)
+        joinButton.snp.makeConstraints { make in
+            make.centerY.equalToSuperview().offset(-128)
+            make.left.equalTo(32)
+            make.width.equalTo(halfWidth)
+            make.height.equalTo(50)
+        }
+        
+        createButton.titleColor = .grayBG
+        createButton.backgroundColor = .primary
+        createButton.layer.cornerRadius = 4
+        createButton.title = "Create a Room"
+        createButton.addTarget(self, action: #selector(createButtonPressed), for: .touchUpInside)
+        self.view.addSubview(createButton)
+        createButton.snp.makeConstraints { make in
+            make.centerY.equalToSuperview().offset(-128)
+            make.right.equalToSuperview().offset(-32)
+            make.width.equalTo(halfWidth)
+            make.height.equalTo(50)
+        }
+        
+    }
+    
+    
+    func setupSlideInView() {
+        
+        slideInView.removeFromSuperview()
+        
+        slideInView.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
+        slideInView.layer.cornerRadius = 6
+        slideInView.layer.masksToBounds = true
+        
+        
+        label.text = self.selectedAction == .create ? "Create a Room" : "Join a Room"
         label.textAlignment = .center
-        label.textColor = .white
+        label.textColor = .darkText
         label.font = .avinerMedium
-        self.view.addSubview(label)
+        slideInView.addSubview(label)
         label.snp.makeConstraints { make in
-            make.top.equalTo(segmentController.snp.bottom).offset(24)
+            make.top.equalToSuperview().offset(48)
             make.width.equalToSuperview()
             make.height.equalTo(40)
             make.centerX.equalToSuperview()
         }
         
-        nameTextField.placeholder = "Nickname"
-        nameTextField.tintColor = .greenAccent
-        nameTextField.textColor = .white
-        nameTextField.detailColor = .greenAccent
-        nameTextField.placeholderActiveColor = .greenAccent
-        nameTextField.dividerActiveColor = .greenAccent
-        nameTextField.dividerNormalColor = .greenAccent
-        nameTextField.placeholderNormalColor = UIColor(red: 240/255, green: 240/255, blue: 240/255, alpha: 1)
-        self.view.addSubview(nameTextField)
-        nameTextField.snp.makeConstraints { make in
+        roomTextField.placeholder = "Room Name"
+        roomTextField.tintColor = .primary
+        roomTextField.textColor = .darkPromptText
+        roomTextField.detailColor = .primary
+        roomTextField.placeholderActiveColor = .primary
+        roomTextField.dividerActiveColor = .primary
+        roomTextField.dividerNormalColor = .primary
+        roomTextField.placeholderNormalColor = .darkPromptText
+        slideInView.addSubview(roomTextField)
+        roomTextField.snp.makeConstraints { make in
             make.top.equalTo(label.snp.bottom).offset(24)
             make.centerX.equalToSuperview()
             make.width.equalToSuperview().offset(-32)
             make.height.equalTo(40)
         }
         
-        roomTextField.placeholder = "Room Name"
-        roomTextField.tintColor = .greenAccent
-        roomTextField.textColor = .white
-        roomTextField.detailColor = .greenAccent
-        roomTextField.placeholderActiveColor = .greenAccent
-        roomTextField.dividerActiveColor = .greenAccent
-        roomTextField.dividerNormalColor = .greenAccent
-        roomTextField.placeholderNormalColor = UIColor(red: 240/255, green: 240/255, blue: 240/255, alpha: 1)
-        self.view.addSubview(roomTextField)
-        roomTextField.snp.makeConstraints { make in
-            make.top.equalTo(nameTextField.snp.bottom).offset(24)
+        passwordTextField.placeholder = "Room Password"
+        passwordTextField.tintColor = .primary
+        passwordTextField.textColor = .darkPromptText
+        passwordTextField.detailColor = .primary
+        passwordTextField.placeholderActiveColor = .primary
+        passwordTextField.dividerActiveColor = .primary
+        passwordTextField.dividerNormalColor = .primary
+        passwordTextField.placeholderNormalColor = .darkPromptText
+        slideInView.addSubview(passwordTextField)
+        passwordTextField.snp.makeConstraints { make in
+            make.top.equalTo(roomTextField.snp.bottom).offset(24)
             make.centerX.equalToSuperview()
             make.width.equalToSuperview().offset(-32)
             make.height.equalTo(40)
         }
         
-        button.titleColor = .greenAccent
+        button.titleColor = .grayBG
+        button.backgroundColor = .primary
         button.layer.cornerRadius = 4
-        button.layer.borderColor = UIColor.greenAccent.cgColor
-        button.layer.borderWidth = 1.5
-        button.title = "Create a Room"
-        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
-        self.view.addSubview(button)
+        button.title = self.selectedAction == .create ? "Create Room" : "Join Room"
+        button.addTarget(self, action: #selector(continueButtonPressed), for: .touchUpInside)
+        slideInView.addSubview(button)
         button.snp.makeConstraints { make in
-            make.top.equalTo(roomTextField.snp.bottom).offset(24)
+            make.top.equalTo(passwordTextField.snp.bottom).offset(48)
             make.centerX.equalToSuperview()
             make.width.equalToSuperview().offset(-32)
             make.height.equalTo(50)
         }
         
-        let divider = UIView()
-        divider.backgroundColor = .greenAccent
-        divider.layer.cornerRadius = 1
-        self.view.addSubview(divider)
-        divider.snp.makeConstraints { make in
-            make.top.equalTo(button.snp.bottom).offset(24)
-            make.height.equalTo(2)
-            make.left.equalToSuperview().offset(24)
-            make.right.equalToSuperview().offset(-24)
-        }
         
-        let browseButton = FlatButton()
-        browseButton.titleColor = .greenAccent
-        browseButton.layer.cornerRadius = 4
-        browseButton.layer.borderColor = UIColor.greenAccent.cgColor
-        browseButton.layer.borderWidth = 1.5
-        browseButton.title = "Browse Rooms"
-        browseButton.addTarget(self, action: #selector(browseButtonPressed), for: .touchUpInside)
-        self.view.addSubview(browseButton)
-        browseButton.snp.makeConstraints { make in
-            make.top.equalTo(divider.snp.bottom).offset(24)
+        let closebutton = IconButton(image: Icon.cm.close, tintColor: Color.grey.darken1)
+        closebutton.addTarget(self, action: #selector(pressedClose), for: .touchUpInside)
+        slideInView.addSubview(closebutton)
+        closebutton.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(24)
+            make.left.equalToSuperview().offset(16)
+            make.size.equalTo(CGSize(width: 24, height: 24))
+        }
+        self.slideInView.alpha = 0
+        self.view.addSubview(slideInView)
+        slideInView.snp.makeConstraints { make in
+            make.top.equalTo(joinButton.snp.bottom).offset(24)
+            make.width.equalToSuperview().offset(-64)
+            make.bottom.equalToSuperview().offset(-64)
             make.centerX.equalToSuperview()
-            make.width.equalToSuperview().offset(-32)
-            make.height.equalTo(50)
         }
         
+        
+        UIView.animate(withDuration: 0.2, animations: {
+            self.slideInView.alpha = 1.0
+        })
+    }
+    
+    func setDisconnect() {
+        if let tabBarController = self.tabBarController as? TabBarController {
+            tabBarController.disconnect = self.disconnect
+            tabBarController.setDisconnect()
+        }
+    }
+    
+    @objc func pressedClose() {
+        UIView.animate(withDuration: 0.2, animations: {
+            self.slideInView.alpha = 0
+        })
     }
     
     @objc func hideKeyboard() {
@@ -161,28 +230,22 @@ class JoinRoomViewController: UIViewController {
                 field.resignFirstResponder()
             }
         }
-    }
-    @objc func browseButtonPressed() {
-        let browseVC = BrowseTableViewController()
-        browseVC.joinRoomAction = { roomName in
-            self.joinRoom(roomName: roomName)
-        }
-        self.present(browseVC, animated: true, completion: nil)
-    }
-    @objc func updateSelectedAction(sender: Any) {
-        if let sender = sender as? UISegmentedControl {
-            if  sender.selectedSegmentIndex == 0 {
-                selectedAction = .create
-                label.text = "Create a Room"
-                button.title = "Create Room"
-            } else {
-                selectedAction = .join
-                label.text = "Join a Room"
-                button.title = "Join Room"
+        for field in self.slideInView.subviews.filter({ $0 as? TextField != nil }) {
+            if let field = field as? TextField {
+                field.resignFirstResponder()
             }
         }
     }
-    @objc func buttonPressed() {
+    
+    @objc func joinButtonPressed() {
+        selectedAction = .join
+        setupSlideInView()
+    }
+    @objc func createButtonPressed() {
+        selectedAction = .create
+        setupSlideInView()
+    }
+    @objc func continueButtonPressed() {
         if selectedAction == .join {
             joinRoom()
         } else {
@@ -191,71 +254,31 @@ class JoinRoomViewController: UIViewController {
     }
     
     func joinRoom(roomName : String? = nil) {
+        if nameTextField.text == "" {
+            SCLAlertView().showInfo("No nickname", subTitle: "Please enter a nickname to continue.", colorStyle: primaryHex)
+            return
+        }
+        
         let name = roomName != nil ? roomName : roomTextField.text
         if let roomName = name, roomName != "" {
-            DispatchQueue.main.async {
-                let urlComponents = NSURLComponents(string: "http://206.189.205.9/room/join")!
-
+            let urlComponents = NSURLComponents(string: "http://206.189.205.9/room/join")!
+            
+            if passwordTextField.text == "" {
                 urlComponents.queryItems = [
                     (NSURLQueryItem(name: "name", value: roomName) as URLQueryItem)
                 ]
-                
-                guard let url = urlComponents.url else { return }
-                print(url)
-                var request = URLRequest(url: url)
-                request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-                request.httpMethod = "GET"
-
-                let task = URLSession.shared.dataTask(with: request) { data, response, error in
-                    guard let data = data, error == nil else {
-                        print(error?.localizedDescription ?? "No data")
-                        return
-                    }
-                    let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-                    if let responseJSON = responseJSON as? [String: Any] {
-                        print(responseJSON)
-                        if responseJSON["error"] == nil {
-                            self.joinRoomAction()
-                            DispatchQueue.main.async {
-                                let audioRoom = AudioRoomViewController()
-                                audioRoom.roomName = roomName
-                                audioRoom.disconnect = { self.disconnect() }
-                                audioRoom.modalPresentationStyle = . overFullScreen
-                                self.present(audioRoom, animated: true, completion: nil)
-                            }
-                        } else {
-                            // alert
-                        }
-                    }
-                }
-
-                task.resume()
-                
+            } else {
+                urlComponents.queryItems = [
+                    (NSURLQueryItem(name: "name", value: roomName) as URLQueryItem),
+                    (NSURLQueryItem(name: "password", value: passwordTextField.text) as URLQueryItem)
+                ]
             }
             
-        } else {
-            // alert
-        }
-    }
-    
-    func createRoom() {
-        
-        if let roomName = roomTextField.text, let creator = nameTextField.text {
-            let json: [String: Any] = [
-                "name" : roomName,
-                "creator" : creator,
-                "private" : false,
-                "password": ""
-            ]
-
-            let jsonData = try? JSONSerialization.data(withJSONObject: json)
-
-            let url = URL(string: "http://206.189.205.9/room/")!
+            guard let url = urlComponents.url else { return }
             var request = URLRequest(url: url)
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-            request.httpMethod = "POST"
-            request.httpBody = jsonData
-
+            request.httpMethod = "GET"
+            
             let task = URLSession.shared.dataTask(with: request) { data, response, error in
                 guard let data = data, error == nil else {
                     print(error?.localizedDescription ?? "No data")
@@ -264,17 +287,73 @@ class JoinRoomViewController: UIViewController {
                 let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
                 if let responseJSON = responseJSON as? [String: Any] {
                     print(responseJSON)
-                    self.joinRoomAction()
+                    if responseJSON["error"] == nil {
+                        joinRoomAction(nil)
+                        DispatchQueue.main.async {
+                            let audioRoom = AudioRoomViewController()
+                            audioRoom.roomName = roomName
+                            audioRoom.disconnect = self.disconnect
+                            audioRoom.modalPresentationStyle = . overFullScreen
+                            self.present(audioRoom, animated: true, completion: nil)
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            SCLAlertView().showInfo("No room found", subTitle: "Please check the name of the room you are joining.", colorStyle: primaryHex)
+                        }
+                    }
+                }
+            }
+            
+            task.resume()
+            
+        } else {
+            DispatchQueue.main.async {
+                SCLAlertView().showInfo("No room found", subTitle: "Please check the name of the room you are joining.", colorStyle: primaryHex)
+            }
+        }
+    }
+    
+    func createRoom() {
+        if roomTextField.text == "" || nameTextField.text == "" {
+            SCLAlertView().showInfo("No room name", subTitle: "Please enter a room name to continue.", colorStyle: primaryHex)
+            return
+        }
+        if let roomName = roomTextField.text, let creator = nameTextField.text {
+            
+            let json: [String: Any] = [
+                "name" : roomName,
+                "creator" : creator,
+                "private" : false,
+                "password": passwordTextField.text
+            ]
+            
+            let jsonData = try? JSONSerialization.data(withJSONObject: json)
+            
+            let url = URL(string: "http://206.189.205.9/room/")!
+            var request = URLRequest(url: url)
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.httpMethod = "POST"
+            request.httpBody = jsonData
+            
+            let task = URLSession.shared.dataTask(with: request) { data, response, error in
+                guard let data = data, error == nil else {
+                    print(error?.localizedDescription ?? "No data")
+                    return
+                }
+                let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+                if let responseJSON = responseJSON as? [String: Any] {
+                    print(responseJSON)
+                    joinRoomAction(nil)
                     DispatchQueue.main.async {
                         let audioRoom = AudioRoomViewController()
                         audioRoom.roomName = roomName
-                        audioRoom.disconnect = { self.disconnect() }
+                        audioRoom.disconnect = self.disconnect
                         audioRoom.modalPresentationStyle = . overFullScreen
                         self.present(audioRoom, animated: true, completion: nil)
                     }
                 }
             }
-
+            
             task.resume()
             
         }

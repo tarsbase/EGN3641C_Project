@@ -12,8 +12,10 @@ target 'EGN3641C' do
 	pod 'SnapKit', '~> 5.0.0'
 	pod 'Material', '~> 3.1.0'
 	pod 'Firebase/Analytics'
+  pod 'TwilioVoice'
   pod 'TwilioVideo'
   pod 'Alamofire', '~> 5.0.0-rc.3'
+  pod 'SCLAlertView'
 
 #  target 'EGN3641CTests' do
 #    inherit! :search_paths

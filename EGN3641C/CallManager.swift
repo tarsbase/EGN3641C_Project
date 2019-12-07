@@ -17,6 +17,8 @@ let baseURLString = "http://206.189.205.9"
 let accessTokenEndpoint = "/accessToken"
 let identity = "brandon"
 
+var joinRoomAction : (String?) -> Void = {_ in}
+
 class CallManager : JoinRoomViewController, UITextFieldDelegate {
     
     var room: Room?
@@ -43,7 +45,8 @@ class CallManager : JoinRoomViewController, UITextFieldDelegate {
     var callKitCompletionCallback: ((Bool)->Swift.Void?)? = nil
     
     
-    required init?(coder aDecoder: NSCoder) {
+    init() {
+        
         isSpinning = false
         voipRegistry = PKPushRegistry.init(queue: DispatchQueue.main)
         
@@ -57,10 +60,28 @@ class CallManager : JoinRoomViewController, UITextFieldDelegate {
         callKitProvider = CXProvider(configuration: configuration)
         callKitCallController = CXCallController()
         
-        super.init(coder: aDecoder)
+        super.init(nibName: nil, bundle: nil)
+//        super.init(coder: aDecoder)
         
         callKitProvider.setDelegate(self, queue: nil)
         
+        super.disconnect = {
+            print(self.room)
+            self.room?.disconnect()
+            self.call?.disconnect()
+            super.setDisconnect()
+        }
+        joinRoomAction = { roomName in
+            DispatchQueue.main.async {
+                if let roomName = super.roomTextField.text {
+                    self.performStartCallAction(uuid: UUID(), roomName: roomName)
+                }
+            }
+        }
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     deinit {
@@ -71,17 +92,24 @@ class CallManager : JoinRoomViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         TwilioVideoSDK.audioDevice = self.audioDevice;
-        super.joinRoomAction = {
+        
+        joinRoomAction = { roomName in
             DispatchQueue.main.async {
-                if let roomName = super.roomTextField.text {
+                if roomName != nil {
                     self.performStartCallAction(uuid: UUID(), roomName: roomName)
+                } else {
+                    if let roomName = super.roomTextField.text {
+                        self.performStartCallAction(uuid: UUID(), roomName: roomName)
+                    }
                 }
             }
         }
+        
         super.disconnect = {
             print(self.room)
             self.room?.disconnect()
             self.call?.disconnect()
+            super.setDisconnect()
         }
         
     }
